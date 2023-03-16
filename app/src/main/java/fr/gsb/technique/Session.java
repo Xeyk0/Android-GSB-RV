@@ -7,7 +7,7 @@ public class Session {
     static private Session session = null;
     private Visiteur leVisiteur;
 
-    private Session(Visiteur leVisiteur) {
+    public Session(Visiteur leVisiteur) {
         this.leVisiteur = leVisiteur;
     }
 
