@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RV-Visiteur</string>
+    <string name="lbl_Matricule">Matricule :</string>
+    <string name="lbl_MDP">Mot de passe :</string>
+    <string name="btn_Valider">Valider</string>
+    <string name="btn_Annuler">Annuler</string>
+</resources>
