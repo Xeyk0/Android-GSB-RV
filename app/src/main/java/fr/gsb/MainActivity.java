@@ -1,15 +1,12 @@
 package fr.gsb;
 
 
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.media.tv.TvInputService;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import fr.gsb.entities.Visiteur;
 import fr.gsb.modeles.ModeleGsb;
@@ -19,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     EditText etMatricule;
     EditText etMDP;
     ModeleGsb modele = new ModeleGsb();
-    Visiteur visiteur;
 
 
     @Override
@@ -39,9 +35,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this,"Connexion réussie. Bienvenue "+ visiteur.getPrenom()+" "+visiteur.getNom(),Toast.LENGTH_LONG).show();
 
             } else {
-                Toast.makeText(this,"Échec à la tentative. Recommencez...",Toast.LENGTH_LONG).show();
-                etMatricule.setText("");
-                etMDP.setText("");
+
+                    Toast.makeText(this, "Matricule ou mot de passe incorrect. Recommencez...", Toast.LENGTH_LONG).show();
+
+                    etMatricule.setText("");
+                    etMDP.setText("");
+
             }
     }
 
