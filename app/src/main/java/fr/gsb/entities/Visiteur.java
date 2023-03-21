@@ -13,6 +13,10 @@ public class Visiteur {
         this.prenom = prenom;
     }
 
+    public Visiteur() {
+
+    }
+
 
     @Override
     public String toString() {
