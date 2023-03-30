@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"/>
+
+
+    <Button
+        android:onClick="consulter"
+        android:id="@+id/consulter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/consutler_rv" />
+
+    <Button
+        android:id="@+id/saisir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saisir_rv"
+       />
+
+        <Button
+            android:id="@+id/seDeconnecter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/deconnection"
+            />
+
+
+    </LinearLayout>
+</RelativeLayout>

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Visiteur visiteur = modele.seConnecter(etMatricule.getText().toString(), etMDP.getText().toString());
 
 
-        String url = "http://127.0.0.1:8000/visiteurs/" + etMatricule.getText().toString() + "/" + etMDP.getText().toString();
+       /* String url = "http://127.0.0.1/visiteurs/" + etMatricule.getText().toString() + "/" + etMDP.getText().toString();
 
         Response.Listener<JSONObject> ecouteurReponse = new Response.Listener<JSONObject>() {
 
@@ -80,14 +80,15 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        JsonObjectRequest requete = new JsonObjectRequest(Request.Method.GET, "http://127.0.0.1:8000/visiteurs/" + etMatricule.getText().toString() + "/" + etMDP.getText().toString(), null, ecouteurReponse, ecouteurError);
+        JsonObjectRequest requete = new JsonObjectRequest(Request.Method.GET, "http://127.0.0.1/visiteurs/" + etMatricule.getText().toString() + "/" + etMDP.getText().toString(), null, ecouteurReponse, ecouteurError);
         RequestQueue fileRequetes = Volley.newRequestQueue(this);
         fileRequetes.add(requete);
 
-/*
+*/
         if (visiteur != null) {
             Session.ouvrir(visiteur);
-            Toast.makeText(this, "Connexion réussie. Bienvenue " + visiteur.getPrenom() + " " + visiteur.getNom(), Toast.LENGTH_LONG).show();
+            Intent intentionEnvoyer = new Intent(getApplicationContext(), MenuRvActivity.class);
+            startActivity(intentionEnvoyer);
 
         } else {
 
@@ -98,8 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-*/
-    }
+
     public void annule (View vue){
         etMatricule.setText("");
         etMDP.setText("");

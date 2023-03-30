@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">RV-Visiteur</string>
+    <string name="app_name">GSB Rapport de Visite - Visiteur</string>
     <string name="lbl_Matricule">Matricule :</string>
     <string name="lbl_MDP">Mot de passe :</string>
     <string name="btn_Valider">Valider</string>
     <string name="btn_Annuler">Annuler</string>
+    <string name="saisir_rv">saisissez un rapport de visite</string>
+    <string name="consutler_rv">Consulter vos rapports de visites</string>
+    <string name="deconnection">Se déconnecter</string>
 </resources>
