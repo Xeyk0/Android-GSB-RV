@@ -1,32 +1,28 @@
 package fr.gsb;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-
-
+import java.net.URLEncoder;
 
 import fr.gsb.entities.Visiteur;
 import fr.gsb.modeles.ModeleGsb;
@@ -53,42 +49,29 @@ public class MainActivity extends AppCompatActivity {
 
         Visiteur visiteur = modele.seConnecter(etMatricule.getText().toString(), etMDP.getText().toString());
 
+       /* String matricule= URLEncoder.encode("a131","UTF-8");
+        String url = String.format("http://127.0.0.1:5000/%s/%s");
 
-       /* String url = "http://127.0.0.1/visiteurs/" + etMatricule.getText().toString() + "/" + etMDP.getText().toString();
-
-        Response.Listener<JSONObject> ecouteurReponse = new Response.Listener<JSONObject>() {
-
+        Response.Listener<String> ecouteurReponse = new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    Visiteur unVisiteur = new Visiteur();
-                    unVisiteur.setMatricule(response.getString("matricule"));
-                    unVisiteur.setNom(response.getString("nom"));
-                    unVisiteur.setPrenom(response.getString("prenom"));
-                    Session.ouvrir(visiteur);
-                    Log.v(TAG, "JSON:OK");
+            public void onResponse(String response) {
 
-                } catch (JSONException e) {
-                    Log.e(TAG, "JSON :" + e.getMessage());
-                }
             }
         };
-        Response.ErrorListener ecouteurError = new Response.ErrorListener() {
+        Response.ErrorListener ecouteurErreur= new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Erreur HTTP :" + " " + error.getMessage());
+                Log.e("GSB-RV","ERREUR HTTP :" +error.getMessage());
             }
         };
+        StringRequest requete = new StringRequest( Request.Method.GET,url,ecouteurReponse,ecouteurErreur);
 
-        JsonObjectRequest requete = new JsonObjectRequest(Request.Method.GET, "http://127.0.0.1/visiteurs/" + etMatricule.getText().toString() + "/" + etMDP.getText().toString(), null, ecouteurReponse, ecouteurError);
-        RequestQueue fileRequetes = Volley.newRequestQueue(this);
+        RequestQueue fileRequetes= Volley.newRequestQueue(this);
         fileRequetes.add(requete);
-
 */
         if (visiteur != null) {
             Session.ouvrir(visiteur);
-            Intent intentionEnvoyer = new Intent(getApplicationContext(), MenuRvActivity.class);
-            startActivity(intentionEnvoyer);
+            Toast.makeText(this, "Connexion réussie. Bienvenue " + visiteur.getPrenom() + " " + visiteur.getNom(), Toast.LENGTH_LONG).show();
 
         } else {
 
@@ -100,8 +83,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void annule (View vue){
+
+    public void annule(View vue) {
         etMatricule.setText("");
         etMDP.setText("");
     }
+
+
+
 }
