@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import fr.gsb.MainActivity;
 
@@ -17,9 +18,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MenuRvActivity extends AppCompatActivity {
     static final String TAG = "GSB_Menu_Rv_Activity";
-    TextView tvNomPrenom;
+    TextView identifiant;
     Button consulter;
     Button saisir;
+
+    Button deconnexion;
 
 
     @SuppressLint("SetTextI18n")
@@ -28,10 +31,11 @@ public class MenuRvActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        tvNomPrenom = findViewById(R.id.id);
-        tvNomPrenom.setText(Session.getSession().getLeVisiteur().getPrenom() + " " + Session.getSession().getLeVisiteur().getNom());
+        identifiant = findViewById(R.id.id);
+        identifiant.setText(Session.getSession().getLeVisiteur().getPrenom() + " " + Session.getSession().getLeVisiteur().getNom());
         consulter = findViewById(R.id.consulter);
         saisir = findViewById(R.id.saisir);
+        deconnexion = findViewById(R.id.seDeconnecter);
 
         Log.v(TAG, "onCreate :" + "Création de l'activité MenuRV");
 

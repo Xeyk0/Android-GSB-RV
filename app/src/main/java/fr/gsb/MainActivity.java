@@ -1,6 +1,7 @@
 package fr.gsb;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void valide(View vue) throws UnsupportedEncodingException {
+    public void valide(View vue) {
 
         Visiteur visiteur = modele.seConnecter(etMatricule.getText().toString(), etMDP.getText().toString());
 
@@ -71,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
 */
         if (visiteur != null) {
             Session.ouvrir(visiteur);
-            Toast.makeText(this, "Connexion réussie. Bienvenue " + visiteur.getPrenom() + " " + visiteur.getNom(), Toast.LENGTH_LONG).show();
-
+            Intent intentionEnvoyer = new Intent(getApplicationContext(), MenuRvActivity.class);
+            startActivity(intentionEnvoyer);
         } else {
 
             Toast.makeText(this, "Matricule ou mot de passe incorrect. Recommencez...", Toast.LENGTH_LONG).show();

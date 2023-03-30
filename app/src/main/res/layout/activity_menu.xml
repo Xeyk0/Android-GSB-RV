@@ -16,17 +16,19 @@
 
 
     <Button
-        android:onClick="consulter"
         android:id="@+id/consulter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/consutler_rv" />
+        android:text="@string/consutler_rv"
+        android:onClick="consulter" />
+
 
     <Button
         android:id="@+id/saisir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/saisir_rv"
+        android:onClick="saisir"/>
        />
 
         <Button
@@ -34,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/deconnection"
-            />
+            android:onClick="seDeconnecter"/>
 
 
     </LinearLayout>
