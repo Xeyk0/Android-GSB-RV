@@ -8,36 +8,45 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40sp" />
 
-    <Button
-        android:id="@+id/consulter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/consutler_rv"
-        android:onClick="consulter" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="124dp"
+                android:orientation="horizontal">
 
+                <Button
+                    android:id="@+id/consulter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="consulter"
+                    android:text="@string/consutler_rv" />
 
-    <Button
-        android:id="@+id/saisir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/saisir_rv"
-        android:onClick="saisir"/>
-       />
+                <Button
+                    android:id="@+id/saisir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="saisir"
+                    android:text="@string/saisir_rv" />
 
-        <Button
-            android:id="@+id/seDeconnecter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/deconnection"
-            android:onClick="seDeconnecter"/>
+            </LinearLayout>
 
+            <Button
+                android:id="@+id/seDeconnecter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="seDeconnecter"
+                android:text="@string/deconnection" />
 
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
