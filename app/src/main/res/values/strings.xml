@@ -7,4 +7,7 @@
     <string name="saisir_rv">saisissez un rapport de visite</string>
     <string name="consutler_rv">Consulter vos rapports de visites</string>
     <string name="deconnection">Se déconnecter</string>
+    <string name="rechercher">Afficher la liste des rapports</string>
+    <string name="retour">Retour</string>
+
 </resources>
