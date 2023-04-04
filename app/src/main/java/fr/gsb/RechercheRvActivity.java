@@ -17,7 +17,9 @@ import fr.gsb.technique.Session;
 public class RechercheRvActivity extends Activity {
     DatePicker date;
     Button rechercher;
-    String dateChoisi;
+    Button deconnecter;
+    Button retour;
+
     static final String TAG = "GSB_Recherche_Rv_Activity";
 
 
@@ -27,13 +29,27 @@ public class RechercheRvActivity extends Activity {
 
         date = findViewById(R.id.date);
         rechercher = findViewById(R.id.rechercher);
+        deconnecter = findViewById(R.id.seDeconnecter);
+        retour = findViewById(R.id.retour);
 
         Log.v(TAG, "onCreate :" + "Création de l'activité MenuRV");
 
     }
-    public void rechercher (View vue){
+    public void rechercher(View vue) {
 
+        int day = date.getDayOfMonth();
+        int month = date.getMonth() + 1;
+        int year = date.getYear();
+
+
+        String dateChoisie = String.format("%02d-%02d-%04d", month, day, year);
+
+
+        Intent intentionEnvoyer = new Intent(getApplicationContext(), ListeRvActivity.class);
+        intentionEnvoyer.putExtra("date", dateChoisie);
+        startActivity(intentionEnvoyer);
     }
+
     public void seDeconnecter(View vue){
         Log.v(TAG, "intention :" + "Intention vers MainActivity + deconnection");
         Session.fermer();

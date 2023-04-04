@@ -31,8 +31,8 @@
                 android:id="@+id/rechercher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/datePicker1"
                 android:layout_marginLeft="100dp"
+                android:onClick="rechercher"
                 android:text="@string/rechercher" />
         </LinearLayout>
 
