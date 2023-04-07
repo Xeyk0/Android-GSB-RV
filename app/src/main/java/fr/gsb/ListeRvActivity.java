@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,10 +20,13 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import fr.gsb.entities.RapportVisite;
+import fr.gsb.technique.Session;
 
 public class ListeRvActivity extends Activity {
     private static final String TAG = "GSB_Liste_Rv_Activity";
-    private static final String API_URL = "";
+    private static final String API_URL = "http://192.168.216.1:80/rapports/"+ Session.getSession().getLeVisiteur().getMatricule();
+
+    TextView rapportVisite;
 
     private RequestQueue requestQueue;
     private ArrayList<RapportVisite> rapports = new ArrayList<>();
@@ -29,24 +34,20 @@ public class ListeRvActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_rv);
+        rapportVisite  = findViewById(R.id.rapportVisite);
+        String mois = getIntent().getStringExtra("mois");
+        String annee = getIntent().getStringExtra("annee");
+        String url = API_URL +"/" + mois + "/" + annee ;
 
-        // Récupération de la date envoyée par l'intention
-        String date = getIntent().getStringExtra("date");
-
-        // Construction de l'URL de l'API avec la date
-        String url = API_URL + date;
-
-        // Initialisation de la RequestQueue Volley
         requestQueue = Volley.newRequestQueue(this);
 
-        // Envoi de la requête à l'API
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            StringBuilder listeRapportVisite = new StringBuilder();
                             for (int i = 0; i < response.length(); i++) {
-                                // Récupération des données du rapport
                                 int numero = response.getJSONObject(i).getInt("rap_num");
                                 String dateVisite = response.getJSONObject(i).getString("rap_date_visite");
                                 String bilan = response.getJSONObject(i).getString("rap_bilan");
@@ -55,22 +56,23 @@ public class ListeRvActivity extends Activity {
                                 String cpPraticien = response.getJSONObject(i).getString("pra_cp");
                                 String villePraticien = response.getJSONObject(i).getString("pra_ville");
 
-                                // Création d'un objet RapportVisite avec ces données
-                                RapportVisite rapport = new RapportVisite(numero, dateVisite, bilan,
-                                        nomPraticien, prenomPraticien, cpPraticien, villePraticien);
+                                listeRapportVisite.append("Numéro de rapport : ").append(numero).append("\n");
+                                listeRapportVisite.append("Date de visite : ").append(dateVisite).append("\n");
+                                listeRapportVisite.append("Bilan : ").append(bilan).append("\n");
+                                listeRapportVisite.append("Nom du praticien : ").append(nomPraticien).append("\n");
+                                listeRapportVisite.append("Prénom du praticien : ").append(prenomPraticien).append("\n");
+                                listeRapportVisite.append("Code postal du praticien : ").append(cpPraticien).append("\n");
+                                listeRapportVisite.append("Ville du praticien : ").append(villePraticien).append("\n\n");
 
-                                // Ajout du rapport à la liste
-                                rapports.add(rapport);
 
-                                Log.i(TAG, rapport.toString());
+                                rapportVisite.setText(listeRapportVisite);
+
+                                Log.i(TAG, listeRapportVisite.toString());
+
                             }
 
-                            // Redirection vers le menu une fois les rapports chargés
-                            Intent intentionEnvoyer = new Intent(getApplicationContext(), MenuRvActivity.class);
-                            startActivity(intentionEnvoyer);
-
                         } catch (JSONException e) {
-                            Log.e(TAG, "Erreur de parsing JSON : " + e.getMessage());
+                            Log.e(TAG, "Erreur JSON : " + e.getMessage());
                         }
                     }
                 },
@@ -81,7 +83,19 @@ public class ListeRvActivity extends Activity {
                     }
                 });
 
-        // Ajout de la requête à la RequestQueue
         requestQueue.add(request);
     }
+    public void seDeconnecter(View vue){
+        Log.v(TAG, "intention :" + "Intention vers MainActivity + deconnection");
+        Session.fermer();
+        Intent intentionEnvoyer = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intentionEnvoyer);
+    }
+
+    public void retour(View vue){
+        Log.v(TAG, "intention :" + "Intention retour en arrière");
+        Intent intentionEnvoyer = new Intent(getApplicationContext(), MenuRvActivity.class);
+        startActivity(intentionEnvoyer);
+    }
+
 }

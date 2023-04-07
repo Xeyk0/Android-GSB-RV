@@ -37,16 +37,17 @@ public class RechercheRvActivity extends Activity {
     }
     public void rechercher(View vue) {
 
-        int day = date.getDayOfMonth();
+
         int month = date.getMonth() + 1;
         int year = date.getYear();
 
 
-        String dateChoisie = String.format("%02d-%02d-%04d", month, day, year);
-
+        String moisChoisie = String.format("%02d", month);
+        String anneeChoisie = String.format("%04d", year);
 
         Intent intentionEnvoyer = new Intent(getApplicationContext(), ListeRvActivity.class);
-        intentionEnvoyer.putExtra("date", dateChoisie);
+        intentionEnvoyer.putExtra("mois", moisChoisie);
+        intentionEnvoyer.putExtra("annee", anneeChoisie);
         startActivity(intentionEnvoyer);
     }
 
