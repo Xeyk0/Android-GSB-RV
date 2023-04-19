@@ -1,16 +1,13 @@
 package fr.gsb;
+
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,12 +16,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -41,6 +36,7 @@ public class SaisieRvActivity extends AppCompatActivity {
     DatePicker dateSaisie;
     Spinner praticiens;
     ArrayList<String> listePraticiens = new ArrayList<>();
+    private static final String url = "http://192.168.167.1:80/praticiens/";
 
     private RequestQueue requestQueue;
 
@@ -65,14 +61,13 @@ public class SaisieRvActivity extends AppCompatActivity {
                                 String nom = response.getJSONObject(i).getString("pra_nom");
                                 String prenom = response.getJSONObject(i).getString("pra_prenom");
 
-                                // Ajouter le nom et prénom du praticien au tableau ou à la liste
-                                listePraticiens.add(nom + " " + prenom);
+                                String praticien = nom + " " + prenom; // Concaténer le nom et prénom du praticien
+                                listePraticiens.add(praticien);
                             }
 
                             // Mettre à jour les données de l'adaptateur avec le tableau ou la liste des praticiens
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, listePraticiens);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(SaisieRvActivity.this, android.R.layout.simple_spinner_dropdown_item, listePraticiens);
                             praticiens.setAdapter(adapter);
-
 
                         } catch (JSONException e) {
                             Log.e(TAG, "Erreur JSON : " + e.getMessage());
@@ -88,7 +83,4 @@ public class SaisieRvActivity extends AppCompatActivity {
 
         requestQueue.add(request);
     }
-
-    }
-
-
+}

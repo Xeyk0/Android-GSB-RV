@@ -48,6 +48,13 @@ public class MenuRvActivity extends AppCompatActivity {
         startActivity(intentionEnvoyer);
 
     }
+    public void saisir(View vue){
+
+        Log.v(TAG, "intention :" + "Intention vers RechercheRvActivity");
+        Intent intentionEnvoyer = new Intent(getApplicationContext(), SaisieRvActivity.class);
+        startActivity(intentionEnvoyer);
+
+    }
     public void seDeconnecter(View vue){
         Log.v(TAG, "intention :" + "Intention vers MainActivity + deconnection");
         Session.fermer();
