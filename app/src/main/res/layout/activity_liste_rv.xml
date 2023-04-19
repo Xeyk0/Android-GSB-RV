@@ -11,16 +11,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvRapport"
+        <ListView
+            android:id="@+id/liste_rapports"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rappot sélectionné: "/>
-
-
-        <TextView
-            android:id="@+id/rapportVisite"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button

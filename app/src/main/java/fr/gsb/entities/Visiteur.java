@@ -1,10 +1,10 @@
 package fr.gsb.entities;
-
 public class Visiteur {
-    private String matricule;
-    private String mdp;
-    private String nom;
-    private String prenom;
+
+    private String matricule ;
+    private String mdp ;
+    private String nom ;
+    private String prenom ;
 
     public Visiteur(String matricule, String mdp, String nom, String prenom) {
         this.matricule = matricule;
@@ -12,20 +12,8 @@ public class Visiteur {
         this.nom = nom;
         this.prenom = prenom;
     }
-
     public Visiteur() {
 
-    }
-
-
-    @Override
-    public String toString() {
-        return "Visiteur{" +
-                "matricule='" + matricule + '\'' +
-                ", mdp='" + mdp + '\'' +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                '}';
     }
 
     public String getMatricule() {
@@ -58,5 +46,15 @@ public class Visiteur {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    @Override
+    public String toString() {
+        return "Visiteur{" +
+                "matricule='" + matricule + '\'' +
+                ", mdp='" + mdp + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                '}';
     }
 }

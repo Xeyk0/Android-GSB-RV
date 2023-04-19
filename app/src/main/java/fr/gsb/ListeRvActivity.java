@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,47 +26,42 @@ import java.util.ArrayList;
 import fr.gsb.entities.RapportVisite;
 import fr.gsb.technique.Session;
 
-public class ListeRvActivity extends Activity {
+public class ListeRvActivity extends AppCompatActivity {
     private static final String TAG = "GSB_Liste_Rv_Activity";
     private static final String API_URL = "http://192.168.167.1:80/rapports/"+ Session.getSession().getLeVisiteur().getMatricule();
 
-    TextView rapportVisite;
-
-    private RequestQueue requestQueue;
+    private ListView listeRapport;
+    private ArrayAdapter<RapportVisite> adapter;
     private ArrayList<RapportVisite> rapports = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_rv);
-        rapportVisite  = findViewById(R.id.rapportVisite);
+        listeRapport = findViewById(R.id.liste_rapports);
+
         String mois = getIntent().getStringExtra("mois");
         String annee = getIntent().getStringExtra("annee");
         String url = API_URL +"/" + mois + "/" + annee ;
 
-        requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            StringBuilder listeRapportVisite = new StringBuilder();
                             for (int i = 0; i < response.length(); i++) {
                                 int numero = response.getJSONObject(i).getInt("rap_num");
                                 String dateVisite = response.getJSONObject(i).getString("rap_date_visite");
                                 String bilan = response.getJSONObject(i).getString("rap_bilan");
 
-
-                                listeRapportVisite.append("Numéro de rapport : ").append(numero).append("\n");
-                                listeRapportVisite.append("Date de visite : ").append(dateVisite).append("\n");
-                                listeRapportVisite.append("Bilan : ").append(bilan).append("\n");
-
-
-                                rapportVisite.setText(listeRapportVisite);
-
-                                Log.i(TAG, listeRapportVisite.toString());
-
+                                RapportVisite rapport = new RapportVisite(numero, dateVisite, bilan );
+                                rapports.add(rapport);
                             }
+
+                            // Adapter pour afficher les rapports dans le ListView
+                            adapter = new ArrayAdapter<>(ListeRvActivity.this, android.R.layout.simple_list_item_1, rapports);
+                            listeRapport.setAdapter(adapter);
 
                         } catch (JSONException e) {
                             Log.e(TAG, "Erreur JSON : " + e.getMessage());
@@ -77,18 +76,26 @@ public class ListeRvActivity extends Activity {
                 });
 
         requestQueue.add(request);
-    }
-    public void seDeconnecter(View vue){
-        Log.v(TAG, "intention :" + "Intention vers MainActivity + deconnection");
-        Session.fermer();
-        Intent intentionEnvoyer = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intentionEnvoyer);
-    }
 
+        // Ecouteur de clic sur les éléments du ListView
+        listeRapport.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Récupérer le rapport de visite sélectionné
+                RapportVisite rapport = rapports.get(position);
+
+                // Passer les données individuelles du rapport de visite à l'activité de détail du rapport
+                Intent intent = new Intent(ListeRvActivity.this, VisuRvActivity.class);
+                intent.putExtra("numero", rapport.getNumero());
+                intent.putExtra("dateVisite", rapport.getDateVisite());
+                intent.putExtra("bilan", rapport.getBilan());
+                startActivity(intent);
+            }
+        });
+    }
     public void retour(View vue){
         Log.v(TAG, "intention :" + "Intention retour en arrière");
-        Intent intentionEnvoyer = new Intent(getApplicationContext(), MenuRvActivity.class);
+        Intent intentionEnvoyer = new Intent(getApplicationContext(), RechercheRvActivity.class);
         startActivity(intentionEnvoyer);
     }
-
 }

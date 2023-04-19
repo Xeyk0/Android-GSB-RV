@@ -50,7 +50,7 @@ public class MenuRvActivity extends AppCompatActivity {
     }
     public void saisir(View vue){
 
-        Log.v(TAG, "intention :" + "Intention vers RechercheRvActivity");
+        Log.v(TAG, "intention :" + "Intention vers SaisieRvActivity");
         Intent intentionEnvoyer = new Intent(getApplicationContext(), SaisieRvActivity.class);
         startActivity(intentionEnvoyer);
 

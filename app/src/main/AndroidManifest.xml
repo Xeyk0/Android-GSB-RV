@@ -31,6 +31,12 @@
 
 
         </activity>
+        <activity
+            android:name=".SaisieRvActivity"
+            android:exported="true">
+
+
+        </activity>
 
         <activity
             android:name=".RechercheRvActivity"
@@ -38,6 +44,11 @@
         </activity>
         <activity
             android:name=".ListeRvActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".VisuRvActivity"
             android:exported="true">
         </activity>
     </application>

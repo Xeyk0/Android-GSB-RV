@@ -1,8 +1,10 @@
 package fr.gsb.entities;
 
-import java.time.LocalDate;
 
-public class RapportVisite {
+
+
+
+public class RapportVisite  {
     private int numero;
 
     private String dateVisite;
@@ -11,6 +13,8 @@ public class RapportVisite {
 
     private String nomPraticien;
 
+    private String numPraticien;
+
     private String prenomPraticien;
 
     private String cpPraticien;
@@ -18,7 +22,6 @@ public class RapportVisite {
     private String villePraticen;
 
     public RapportVisite(){}
-
 
     public RapportVisite(int numero, String dateVisite, String bilan, String nomPraticien, String prenomPraticien, String cpPraticien, String villePraticen) {
         this.numero = numero;
@@ -30,7 +33,14 @@ public class RapportVisite {
         this.villePraticen = villePraticen;
     }
 
+
+
+
+
     public RapportVisite(int numero, String dateVisite, String bilan) {
+        this.numero = numero;
+        this.dateVisite = dateVisite;
+        this.bilan = bilan;
     }
 
     public int getNumero() {
@@ -102,4 +112,6 @@ public class RapportVisite {
                 ", villePraticen='" + villePraticen + '\'' +
                 '}';
     }
+
+
 }
