@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void valide(View vue) {
-        String url = "http://192.168.216.1:80/visiteurs/"+etMatricule.getText().toString()+"/"+etMDP.getText().toString();
+        String url = "http://192.168.167.1:80/visiteurs/"+etMatricule.getText().toString()+"/"+etMDP.getText().toString();
 
        Response.Listener<JSONObject> ecouteurReponse = new Response.Listener<JSONObject>() {
            @Override

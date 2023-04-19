@@ -24,7 +24,7 @@ import fr.gsb.technique.Session;
 
 public class ListeRvActivity extends Activity {
     private static final String TAG = "GSB_Liste_Rv_Activity";
-    private static final String API_URL = "http://192.168.216.1:80/rapports/"+ Session.getSession().getLeVisiteur().getMatricule();
+    private static final String API_URL = "http://192.168.167.1:80/rapports/"+ Session.getSession().getLeVisiteur().getMatricule();
 
     TextView rapportVisite;
 
@@ -51,18 +51,11 @@ public class ListeRvActivity extends Activity {
                                 int numero = response.getJSONObject(i).getInt("rap_num");
                                 String dateVisite = response.getJSONObject(i).getString("rap_date_visite");
                                 String bilan = response.getJSONObject(i).getString("rap_bilan");
-                                String nomPraticien = response.getJSONObject(i).getString("pra_nom");
-                                String prenomPraticien = response.getJSONObject(i).getString("pra_prenom");
-                                String cpPraticien = response.getJSONObject(i).getString("pra_cp");
-                                String villePraticien = response.getJSONObject(i).getString("pra_ville");
+
 
                                 listeRapportVisite.append("Numéro de rapport : ").append(numero).append("\n");
                                 listeRapportVisite.append("Date de visite : ").append(dateVisite).append("\n");
                                 listeRapportVisite.append("Bilan : ").append(bilan).append("\n");
-                                listeRapportVisite.append("Nom du praticien : ").append(nomPraticien).append("\n");
-                                listeRapportVisite.append("Prénom du praticien : ").append(prenomPraticien).append("\n");
-                                listeRapportVisite.append("Code postal du praticien : ").append(cpPraticien).append("\n");
-                                listeRapportVisite.append("Ville du praticien : ").append(villePraticien).append("\n\n");
 
 
                                 rapportVisite.setText(listeRapportVisite);

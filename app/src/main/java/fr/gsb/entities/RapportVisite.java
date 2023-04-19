@@ -30,6 +30,9 @@ public class RapportVisite {
         this.villePraticen = villePraticen;
     }
 
+    public RapportVisite(int numero, String dateVisite, String bilan) {
+    }
+
     public int getNumero() {
         return numero;
     }
